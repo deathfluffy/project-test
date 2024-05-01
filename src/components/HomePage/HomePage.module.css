@@ -1,0 +1,11 @@
+.sectionHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.container {
+  max-width: 800px;
+  text-align: center;
+}

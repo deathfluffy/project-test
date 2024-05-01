@@ -1,5 +1,100 @@
+@import "../node_modules/modern-normalize/modern-normalize.css";
+:root {
+  --font-main: "Inter", sans-serif;
+  --color-black-main: #101828;
+  --color-grey-main: #475467;
+  --color-red-main: #e44848;
+  --color-yellow-main: #ffc531;
+  --color-light-white-main: #f2f4f7;
+  --color-white-background-main: #f7f7f7;
+  /*? Container device width options */
+  --mobile-container-width: 280px;
+  --tablet-container-width: 704px;
+  --desktop-container-width: 1240px;
+
+  /*? Container configurations */
+  --container-width: var(--mobile-container-width);
+  --container-side-padding: 20px;
+  --container-max-width: calc(
+    var(--container-width) + var(--container-side-padding) * 2
+  );
+}
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+/* Reset styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  margin-bottom: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  padding: 0;
+  color: currentColor;
+  background-color: transparent;
+}
+
+input {
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-main);
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+}
+/* Tablet */
+@media screen and (min-width: 768px) {
+  :root {
+    --container-width: var(--tablet-container-width);
+    --background-screen-width: var(--tablet-background-screen-width);
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  :root {
+    --container-width: var(--desktop-container-width);
+    --background-screen-width: var(--desktop-background-screen-width);
+  }
 }

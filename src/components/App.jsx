@@ -10,7 +10,6 @@ export const App = () => {
   return (
     <>
       <NavigationBar />
-
       <main>
         <Suspense fallback={<PageLoader />}>
           <Routes>

@@ -1,156 +1,76 @@
-.header {
-  position: relative;
-  margin-top: 8px;
-}
-
-.container {
+.navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
 }
 
-.userMenuToggle {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
+.navBar .title {
+  font-size: 1.5rem;
+  margin: 1rem;
+  font-weight: bold;
+}
+
+.navBar .listOptions {
   display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
-.iconUser {
-  border-radius: 28px;
+.navBar .listOptions .listItems {
+  list-style: none;
 }
 
-.iconWithoutAvatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 16px;
-  background-color: #ff9d43;
-  color: #ffffff;
+.navBar .listOptions .listItems .linkItem {
+  display: block;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.userMenuDropdown {
+.navBar .menu {
+  display: none;
   position: absolute;
-  border-radius: 10px;
-  z-index: 2;
-  box-shadow: 0px 4px 8px 0px var(--color-secondary-light-blue);
-  background-color: var(--color-primary-white);
-  right: -5%;
-  top: 2px;
-  padding: 16px;
-  display: flex;
+  top: 0.75rem;
+  right: 0.5rem;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
+  width: 2.25rem;
+  height: 2rem;
 }
 
-.userMenuDropdown .itemIcon {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  gap: 8px;
+.navBar .menu span {
+  height: 0.4rem;
+  width: 100%;
+
+  border-radius: 0.2rem;
 }
 
-.profileDropDown {
-  position: relative;
-}
-
-.userMenuToggle {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.icon {
-  stroke: var(--primery-color-blue);
-  transition: transform var(--transition-time) var(--transition-function);
-}
-
-.openIcon {
-  transform: rotate(180deg);
-}
-
-.menuItem {
-  color: var(--primery-color-blue);
-}
-
-.userMenuDropdown .menuItem:last-child {
-  padding-top: 0;
-}
-
-.userMenuDropdown .menuItem {
-  cursor: pointer;
-}
-
-.listOptions {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.link:hover {
-  color: var(--secondary-color-5);
-}
-
-.itemText {
-  font-size: 16px;
-  line-height: 125%;
-}
-
-.iconOption {
-  stroke: var(--primery-color-blue);
-  fill: transparent;
-}
-
-.link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 0;
-  font-size: 16px;
-  line-height: 125%;
-  color: var(--primery-color-blue);
-  transition: all 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98) 0s;
-}
-
-.userMenu {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin-left: 4px;
-}
-
-.userName {
-  font-size: 16px;
-  line-height: 125%;
-  text-align: right;
-  margin-right: 4px;
-}
-
-@media screen and (min-width: 768px) {
-  .header {
-    margin-top: 16px;
+@media (max-width: 480px) {
+  .navBar .menu {
+    display: flex;
   }
 
-  .userName {
-    font-size: 18px;
-    line-height: 133%;
+  .navBar {
+    flex-direction: column;
+    align-items: flex-start;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  .header {
-    margin-top: 12px;
+  .navBar .listOptions {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  .navBar .listOptions.open {
+    display: flex;
+  }
+
+  .navBar .listOptions .listItems {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navBar .listOptions .listItems .linkItem {
+    margin: 0.2rem 0.5rem;
   }
 }
