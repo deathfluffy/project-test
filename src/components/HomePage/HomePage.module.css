@@ -6,6 +6,21 @@
 }
 
 .container {
-  max-width: 800px;
+  width: 600px;
   text-align: center;
+}
+.titleHome {
+  margin-bottom: 12px;
+}
+.descHome {
+  margin-bottom: 12px;
+}
+.buttonHome {
+  border-radius: 200px;
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  padding: 16px 24px;
+  transition: 0.3s;
+  &:hover {
+    background-color: var(--color-yellow-main);
+  }
 }

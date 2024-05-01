@@ -11,11 +11,11 @@ import "@fontsource/inter/600.css";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter basename="/project-test">
-    <Provider store={store}>
-      <PersistGate loading={<PageLoader />} persistor={persistor}>
+  <Provider store={store} loading={<PageLoader />}>
+    <PersistGate loading={<PageLoader />} persistor={persistor}>
+      <BrowserRouter basename="/project-test">
         <App />
-      </PersistGate>
-    </Provider>
-  </BrowserRouter>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );

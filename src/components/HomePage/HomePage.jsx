@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import css from "./HomePage.module.css";
+import { CATALOG_ROUTE } from "../../routes/routes";
 export const HomePage = () => {
   return (
     <section className={css.sectionHome}>
@@ -11,6 +13,9 @@ export const HomePage = () => {
           most beautiful corners of nature, enjoy the diversity of cultural
           experiences and take a break from the city bustle.
         </p>
+        <button className={css.buttonHome}>
+          <Link to={CATALOG_ROUTE}>Go to Catalog</Link>
+        </button>
       </div>
     </section>
   );
