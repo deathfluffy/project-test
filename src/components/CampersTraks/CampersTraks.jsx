@@ -40,17 +40,31 @@ export const CampersTraks = () => {
             <div className={css.boxName}>
               <span className={css.nameProduct}>{advert.name}</span>
               <div className={css.iconBox}>
-                <span className={css.priceProduct}>€{advert.price}.00</span>
-                <Icon width="24px" height="24px" id="icon-heart"></Icon>
+                <span className={css.priceProduct}>
+                  €{advert.price}.00
+                  <Icon width="24px" height="24px" id="icon-heart" />
+                </span>
               </div>
             </div>
             <div className={css.containerLocal}>
               <Link className={css.rateBox}>
-                <Icon width="16" height="16" id="icon-star"></Icon>
+                <Icon
+                  width="16"
+                  height="16"
+                  id="icon-star"
+                  className={css.iconReview}
+                ></Icon>
                 {advert.rating}(Reviews {advert.reviews.length})
               </Link>
-              <Icon width="16" height="16" id="icon-map"></Icon>
-              <span className={css.locationProduct}>{advert.location}</span>
+              <span className={css.locationProduct}>
+                <Icon
+                  width="16"
+                  height="16"
+                  id="icon-map"
+                  className={css.iconLocation}
+                ></Icon>
+                {advert.location}
+              </span>
             </div>
             <span className={css.descProduct}>
               {advert.description.length > 55
@@ -60,9 +74,13 @@ export const CampersTraks = () => {
           </div>
         </div>
       ))}
-      {visibleAdverts.length < adverts.length && (
-        <button onClick={loadMoreAdverts}>Load More</button>
-      )}
+      <div className={css.buttonBox}>
+        {visibleAdverts.length < adverts.length && (
+          <button onClick={loadMoreAdverts} className={css.buttonLoad}>
+            Load More
+          </button>
+        )}
+      </div>
     </div>
   );
 };
