@@ -1,0 +1,56 @@
+.boxContainer {
+  border-radius: 20px;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  padding: 24px;
+  display: flex;
+  max-width: 840px;
+  margin-bottom: 32px;
+}
+.containerDesc {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.imgBox {
+  width: 290px;
+  height: 310px;
+}
+.descBox {
+  margin-left: 24px;
+}
+.boxName {
+  display: flex;
+  justify-content: space-between;
+}
+.rateBox {
+  margin-right: 16px;
+}
+.nameProduct {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 8px;
+  color: var(--color-black-main);
+}
+.descProduct {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-grey-main);
+}
+.containerLocal {
+  margin-bottom: 24px;
+}
+.locationProduct {
+  margin-left: 4px;
+}
+.priceProduct {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 8px;
+  color: var(--color-black-main);
+}
