@@ -1,17 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  name: null,
-  price: null,
-  location: "Ukraine, Kyiv",
-  adults: null,
-  children: null,
-  engine: null,
-  transmission: null,
+  adverts: [],
 };
 
 export const catalogSlice = createSlice({
-  name: "products",
+  name: "adverts",
   initialState,
 });
 export const catalogReducer = catalogSlice.reducer;

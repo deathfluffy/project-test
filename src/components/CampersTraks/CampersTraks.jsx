@@ -1,43 +1,45 @@
 import { useEffect, useState } from "react";
-import {
-  fetchAllAdverts,
-  fetchDetailsFromServer,
-} from "../../operations/axios.js";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./CampersTraks.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
+import { selectAdverts } from "../../redux/adverts/adverts.js";
+import { fetchAdverts } from "../../redux/actions/actions.js";
 
 export const CampersTraks = () => {
-  const [adverts, setAdverts] = useState([]);
-  const [visibleAdverts, setVisibleAdverts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const adverts = useSelector(selectAdverts);
+
+  // Змінні для контролю кількості оголошень та кнопки завантаження
+  const [totalAdverts, setTotalAdverts] = useState(0);
   const [advertsPerPage] = useState(4);
+  const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+
+  // Змінні для відображення оголошень
+  const [visibleAdverts, setVisibleAdverts] = useState([]);
 
   useEffect(() => {
-    fetchAllAdverts()
-      .then((advertsData) => {
-        setAdverts(advertsData);
-        setVisibleAdverts(advertsData.slice(0, advertsPerPage));
-      })
-      .catch((error) => {
-        console.error("Error fetching adverts:", error);
-      });
+    // Запит на сервер за списком оголошень
+    dispatch(fetchAdverts());
+  }, [dispatch]);
 
-    fetchDetailsFromServer()
-      .then(() => {})
-      .catch((error) => {
-        console.error("Error fetching categories:", error);
-      });
-  }, [advertsPerPage]);
+  useEffect(() => {
+    // Оновлення загальної кількості оголошень
+    setTotalAdverts(adverts.length);
+    // Оновлення відображених оголошень при кожній зміні загального списку оголошень
+    setVisibleAdverts(adverts.slice(0, advertsPerPage));
+  }, [adverts, advertsPerPage]);
 
+  // Завантажує наступні оголошення
   const loadMoreAdverts = () => {
-    const nextPage = currentPage + 1;
-    const nextAdverts = adverts.slice(
-      currentPage * advertsPerPage,
-      nextPage * advertsPerPage
-    );
+    const nextPage = Math.ceil(visibleAdverts.length / advertsPerPage) + 1;
+    const startIndex = (nextPage - 1) * advertsPerPage;
+    const endIndex = Math.min(startIndex + 4, totalAdverts);
+    const nextAdverts = adverts.slice(startIndex, endIndex);
     setVisibleAdverts((prev) => [...prev, ...nextAdverts]);
-    setCurrentPage(nextPage);
+    if (endIndex >= totalAdverts) {
+      setShowLoadMoreButton(false);
+    }
   };
 
   return (
@@ -94,7 +96,7 @@ export const CampersTraks = () => {
         </div>
       ))}
       <div className={css.buttonBox}>
-        {visibleAdverts.length < adverts.length && (
+        {showLoadMoreButton && (
           <button onClick={loadMoreAdverts} className={css.buttonLoad}>
             Load More
           </button>

@@ -1,20 +1,25 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { catalogReducer } from "./catalog/catalog";
+import { advertsStateReducer } from "./adverts/adverts";
+import { catalogReducer } from "./catalog/catalogSlice";
 
 const persistConfig = {
-  key: "auth",
+  key: "root",
   storage,
   whitelist: [],
 };
 
-const persistedReducer = persistReducer(persistConfig, catalogReducer);
+const rootReducer = persistReducer(
+  persistConfig,
+  combineReducers({
+    adverts: advertsStateReducer,
+    catalog: catalogReducer,
+  })
+);
 
 export const store = configureStore({
-  reducer: {
-    catalog: persistedReducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
