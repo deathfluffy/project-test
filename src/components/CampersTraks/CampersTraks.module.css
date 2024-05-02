@@ -14,6 +14,7 @@
 .imgBox {
   width: 290px;
   height: 310px;
+  border-radius: 10px;
 }
 .descBox {
   margin-left: 24px;
@@ -23,7 +24,16 @@
   justify-content: space-between;
 }
 .rateBox {
+  color: var(--color-black-main);
+  font-weight: 400;
+  line-height: 24px;
   margin-right: 16px;
+  text-decoration: underline;
+}
+.iconReview {
+  fill: var(--color-yellow-main);
+  top: 2px;
+  position: relative;
 }
 .nameProduct {
   font-weight: 600;
@@ -40,17 +50,54 @@
   line-height: 24px;
   color: var(--color-grey-main);
 }
+.locationProduct {
+  color: var(--color-black-main);
+  font-weight: 400;
+  line-height: 24px;
+}
 .containerLocal {
   margin-bottom: 24px;
 }
-.locationProduct {
-  margin-left: 4px;
+.iconLocation {
+  fill: transparent;
+  stroke: var(--color-black-main);
+  margin-right: 4px;
 }
 .priceProduct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 11px;
   font-weight: 600;
   font-style: normal;
   font-size: 24px;
   line-height: 30px;
   margin-bottom: 8px;
   color: var(--color-black-main);
+}
+.buttonBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonLoad {
+  font-family: "Inter", sans-serif;
+  padding: 16px 32px;
+  font-size: 16px;
+  border-radius: 200px;
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  font-weight: 500;
+  line-height: 24px;
+  transition: 0.1ms;
+  &:hover {
+    border-color: var(--color-red-main);
+  }
+}
+.buttonItem {
+  color: var(--color-black-main);
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
 }

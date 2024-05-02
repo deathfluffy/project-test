@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchAllAdverts } from "../../operations/axios.js";
+import {
+  fetchAllAdverts,
+  fetchDetailsFromServer,
+} from "../../operations/axios.js";
 import css from "./CampersTraks.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
@@ -18,6 +21,12 @@ export const CampersTraks = () => {
       })
       .catch((error) => {
         console.error("Error fetching adverts:", error);
+      });
+
+    fetchDetailsFromServer()
+      .then(() => {})
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
       });
   }, [advertsPerPage]);
 
@@ -71,6 +80,16 @@ export const CampersTraks = () => {
                 ? `${advert.description.slice(0, 55)}...`
                 : advert.description}
             </span>
+            <div className={css.detailsButtonsContainer}>
+              {Object.entries(advert.details)
+                .sort(() => Math.random() - 0.7)
+                .slice(0, 7)
+                .map(([category, value]) => (
+                  <button key={category} className={css.detailsButton}>
+                    {category}: {value}
+                  </button>
+                ))}
+            </div>
           </div>
         </div>
       ))}
