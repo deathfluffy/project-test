@@ -10,27 +10,22 @@ export const CampersTraks = () => {
   const dispatch = useDispatch();
   const adverts = useSelector(selectAdverts);
 
-  // Змінні для контролю кількості оголошень та кнопки завантаження
   const [totalAdverts, setTotalAdverts] = useState(0);
   const [advertsPerPage] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
 
-  // Змінні для відображення оголошень
   const [visibleAdverts, setVisibleAdverts] = useState([]);
 
   useEffect(() => {
-    // Запит на сервер за списком оголошень
     dispatch(fetchAdverts());
   }, [dispatch]);
 
   useEffect(() => {
-    // Оновлення загальної кількості оголошень
     setTotalAdverts(adverts.length);
-    // Оновлення відображених оголошень при кожній зміні загального списку оголошень
+
     setVisibleAdverts(adverts.slice(0, advertsPerPage));
   }, [adverts, advertsPerPage]);
 
-  // Завантажує наступні оголошення
   const loadMoreAdverts = () => {
     const nextPage = Math.ceil(visibleAdverts.length / advertsPerPage) + 1;
     const startIndex = (nextPage - 1) * advertsPerPage;
