@@ -1,30 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAction } from "@reduxjs/toolkit";
 
-const apiUrl = "https://663272eec51e14d695647c67.mockapi.io/catalog/adverts";
-
-export const fetchAdverts = createAsyncThunk(
-  "adverts/fetchAdverts",
-  async () => {
-    try {
-      const response = await axios.get(apiUrl);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching adverts:", error);
-      throw error;
-    }
-  }
-);
-export const fetchDetailsFromServer = createAsyncThunk(
-  "adverts/fetchDetailsFromServer",
-  async () => {
-    try {
-      const response = await axios.get(apiUrl);
-      const data = response.data.details;
-      return data;
-    } catch (error) {
-      console.error("Error fetching details:", error);
-      throw error;
-    }
-  }
-);
+export const addToFavorites = createAction("addToFavorites");
+export const removeFromFavorites = createAction("removeFromFavorites");

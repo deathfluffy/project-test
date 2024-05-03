@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAdverts } from "../actions/actions.js";
+import { fetchAdverts } from "../thunkApi/thunkApi";
+import { addToFavorites, removeFromFavorites } from "../actions/actions";
 
-export const advertsSlice = createSlice({
-  name: "adverts",
+export const catalogSlice = createSlice({
+  name: "catalog",
   initialState: {
+    favorites: [],
     adverts: [],
     status: "idle",
     error: null,
@@ -21,10 +23,16 @@ export const advertsSlice = createSlice({
       .addCase(fetchAdverts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addToFavorites, (state, action) => {
+        state.favorites.push(action.payload);
+      })
+      .addCase(removeFromFavorites, (state, action) => {
+        state.favorites = state.favorites.filter(
+          (advertId) => advertId !== action.payload
+        );
       });
   },
 });
 
-export const selectAdverts = (state) => state.adverts.adverts;
-
-export const advertsStateReducer = advertsSlice.reducer;
+export const catalogReducer = catalogSlice.reducer;

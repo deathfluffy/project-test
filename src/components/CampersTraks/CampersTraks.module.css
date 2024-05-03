@@ -35,6 +35,19 @@
   top: 2px;
   position: relative;
 }
+.descriptionContainer {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.containerLoot {
+  display: flex;
+  gap: 16px;
+}
+.imgContainer {
+  width: 290px;
+  height: 310px;
+  margin-bottom: 24px;
+}
 .nameProduct {
   font-weight: 600;
   font-style: normal;
@@ -63,11 +76,39 @@
   stroke: var(--color-black-main);
   margin-right: 4px;
 }
+.iconHeart {
+  position: relative;
+  top: 3px;
+}
+.iconFavorite {
+  stroke: transparent;
+  fill: var(--color-red-main);
+}
+.icon {
+  fill: transparent;
+  stroke: var(--color-black-main);
+}
 .priceProduct {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 11px;
+  margin-right: 10px;
+}
+.containerImg {
+  margin-bottom: 24px;
+}
+.modalLocal {
+  margin-bottom: 16px;
+}
+.modalPrice {
+  margin-bottom: 24px;
+}
+.titleModal {
+  font-weight: 600;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 10px;
+  color: var(--color-black-main);
+}
+.priceProduct {
   font-weight: 600;
   font-style: normal;
   font-size: 24px;

@@ -3,18 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./CampersTraks.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
-import { selectAdverts } from "../../redux/adverts/adverts.js";
-import { fetchAdverts } from "../../redux/actions/actions.js";
 import CategoryIcon from "../GetCategoryIcon/GetCategoryIcon.jsx";
+import { SimpleModal } from "../Modal/Modal.jsx";
+import { fetchAdverts } from "../../redux/thunkApi/thunkApi.js";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/actions/actions.js";
+import { selectAdverts, selectFavorites } from "../../redux/selectors.js";
 
 export const CampersTraks = () => {
   const dispatch = useDispatch();
+  const [selectedAdvert, setSelectedAdvert] = useState(null);
   const adverts = useSelector(selectAdverts);
-
+  const favoriteAdverts = useSelector(selectFavorites);
+  const [modalIsOpen, setModalOpen] = useState(false);
   const [totalAdverts, setTotalAdverts] = useState(0);
   const [advertsPerPage] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
-
   const [visibleAdverts, setVisibleAdverts] = useState([]);
 
   useEffect(() => {
@@ -23,9 +29,16 @@ export const CampersTraks = () => {
 
   useEffect(() => {
     setTotalAdverts(adverts.length);
-
     setVisibleAdverts(adverts.slice(0, advertsPerPage));
   }, [adverts, advertsPerPage]);
+
+  const toggleFavorite = (advertId) => {
+    if (favoriteAdverts && favoriteAdverts.includes(advertId)) {
+      dispatch(removeFromFavorites(advertId));
+    } else {
+      dispatch(addToFavorites(advertId));
+    }
+  };
 
   const loadMoreAdverts = () => {
     const nextPage = Math.ceil(visibleAdverts.length / advertsPerPage) + 1;
@@ -37,7 +50,17 @@ export const CampersTraks = () => {
       setShowLoadMoreButton(false);
     }
   };
+  useEffect(() => {
+    const favoriteIdsString = localStorage.getItem("favoriteAdverts");
+    if (favoriteIdsString && favoriteIdsString !== "undefined") {
+      const favoriteIds = JSON.parse(favoriteIdsString);
+      dispatch({ type: "SET_FAVORITES", payload: favoriteIds });
+    }
+  }, [dispatch]);
 
+  useEffect(() => {
+    localStorage.setItem("favoriteAdverts", JSON.stringify(favoriteAdverts));
+  }, [favoriteAdverts]);
   return (
     <div className={css.container}>
       {visibleAdverts.map((advert) => (
@@ -47,10 +70,22 @@ export const CampersTraks = () => {
             <div className={css.boxName}>
               <span className={css.nameProduct}>{advert.name}</span>
               <div className={css.iconBox}>
-                <span className={css.priceProduct}>
-                  €{advert.price}.00
-                  <Icon width="24px" height="24px" id="icon-heart" />
-                </span>
+                <span className={css.priceProduct}>€{advert.price}.00</span>
+                <button
+                  className={css.iconHeart}
+                  onClick={() => toggleFavorite(advert._id)}
+                >
+                  <Icon
+                    width="24px"
+                    height="24px"
+                    id="icon-heart"
+                    className={
+                      favoriteAdverts && favoriteAdverts.includes(advert._id)
+                        ? css.iconFavorite
+                        : css.icon
+                    }
+                  />
+                </button>
               </div>
             </div>
             <div className={css.containerLocal}>
@@ -73,11 +108,11 @@ export const CampersTraks = () => {
                 {advert.location}
               </span>
             </div>
-            <span className={css.descProduct}>
+            <p className={css.descProduct}>
               {advert.description.length > 55
                 ? `${advert.description.slice(0, 55)}...`
                 : advert.description}
-            </span>
+            </p>
             <div className={css.detailsButtonsContainer}>
               {Object.entries(advert.details)
                 .slice(0, 7)
@@ -92,11 +127,20 @@ export const CampersTraks = () => {
                 ))}
             </div>
             <div className={css.boxShow}>
-              <button className={css.buttonShow}>Show More</button>
+              <button
+                onClick={() => {
+                  setSelectedAdvert(advert);
+                  setModalOpen(true);
+                }}
+                className={css.buttonShow}
+              >
+                Show More
+              </button>
             </div>
           </div>
         </div>
       ))}
+
       <div className={css.buttonBox}>
         {showLoadMoreButton && (
           <button onClick={loadMoreAdverts} className={css.buttonLoad}>
@@ -104,6 +148,59 @@ export const CampersTraks = () => {
           </button>
         )}
       </div>
+
+      <SimpleModal isOpen={modalIsOpen} onClose={() => setModalOpen(false)}>
+        {selectedAdvert && (
+          <>
+            <h2 className={css.titleModal}>{selectedAdvert.name}</h2>
+            <div className={css.modalLocal}>
+              <Link className={css.rateBox}>
+                <Icon
+                  width="16"
+                  height="16"
+                  id="icon-star"
+                  className={css.iconReview}
+                ></Icon>
+                {selectedAdvert.rating}(Reviews {selectedAdvert.reviews.length})
+              </Link>
+              <span className={css.locationProduct}>
+                <Icon
+                  width="16"
+                  height="16"
+                  id="icon-map"
+                  className={css.iconLocation}
+                ></Icon>
+                {selectedAdvert.location}
+              </span>
+            </div>
+            <div className={css.modalPrice}>
+              <span className={css.priceProduct}>
+                €{selectedAdvert.price}.00
+              </span>
+            </div>
+            <div className={css.containerLoot}>
+              <img
+                src={selectedAdvert.gallery[0]}
+                alt="campers"
+                className={css.imgContainer}
+              />
+              <img
+                src={selectedAdvert.gallery[1]}
+                alt="campers"
+                className={css.imgContainer}
+              />
+              <img
+                src={selectedAdvert.gallery[2]}
+                alt="campers"
+                className={css.imgContainer}
+              />
+            </div>
+            <div className={css.descriptionContainer}>
+              <p>{selectedAdvert.description}</p>
+            </div>
+          </>
+        )}
+      </SimpleModal>
     </div>
   );
 };
