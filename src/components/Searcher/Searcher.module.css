@@ -14,11 +14,20 @@
   background-color: #fefefe;
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px; /* Adjust as needed */
-  max-height: 300px; /* Adjust as needed */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
 }
-
+.searchInput {
+  padding: 18px;
+  border-radius: 10px;
+  background: #f7f7f7;
+  border-color: transparent;
+}
+.searchContainer {
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
 .optionsList {
   list-style: none;
   padding: 0;

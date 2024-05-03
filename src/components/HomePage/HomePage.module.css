@@ -21,6 +21,6 @@
   padding: 16px 24px;
   transition: 0.3s;
   &:hover {
-    background-color: var(--color-yellow-main);
+    border-color: var(--color-red-main);
   }
 }

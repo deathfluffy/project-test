@@ -1,0 +1,75 @@
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+.buttonItem {
+  height: 95px;
+  padding: 17px 40px;
+  border-radius: 10px;
+  color: var(--color-main-black);
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 120px;
+  line-height: 20px;
+  transition: 0.3ms;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  &:hover {
+    border: 1px solid #e44848;
+  }
+}
+.titleVehicle {
+  margin-top: 14px;
+  color: var(--color-main-black);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+}
+.boxContainer {
+  margin-bottom: 32px;
+}
+.iconTrack {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.itemIcon {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  margin-bottom: 4px;
+  transform: translateX(-50%);
+}
+.boxEqu {
+  display: flex;
+  gap: 8px;
+  width: 370px;
+  flex-wrap: wrap;
+}
+.boxSeacrh {
+  margin-top: 64px;
+}
+.buttonSearch {
+  padding: 16px 60px;
+  border-radius: 200px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+  transition: 0.5ms;
+  color: #fff;
+  background-color: var(--color-red-main);
+  &:hover {
+    background-color: #d84343;
+  }
+}

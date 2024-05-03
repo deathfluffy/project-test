@@ -5,6 +5,7 @@ import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
 import { selectAdverts } from "../../redux/adverts/adverts.js";
 import { fetchAdverts } from "../../redux/actions/actions.js";
+import CategoryIcon from "../GetCategoryIcon/GetCategoryIcon.jsx";
 
 export const CampersTraks = () => {
   const dispatch = useDispatch();
@@ -79,13 +80,19 @@ export const CampersTraks = () => {
             </span>
             <div className={css.detailsButtonsContainer}>
               {Object.entries(advert.details)
-                .sort(() => Math.random() - 0.7)
                 .slice(0, 7)
                 .map(([category, value]) => (
                   <button key={category} className={css.detailsButton}>
-                    {category}: {value}
+                    <CategoryIcon
+                      category={category}
+                      className={css.iconDetail}
+                    />
+                    {value} {category}
                   </button>
                 ))}
+            </div>
+            <div className={css.boxShow}>
+              <button className={css.buttonShow}>Show More</button>
             </div>
           </div>
         </div>

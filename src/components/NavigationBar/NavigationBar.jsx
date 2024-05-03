@@ -19,7 +19,7 @@ export const NavigationBar = () => {
             </li>
             <li className={css.listItems}>
               <NavLink to={FAVORITE_ROUTE} className={css.linkItem}>
-                Favorite
+                Favorites
               </NavLink>
             </li>
           </ul>
