@@ -12,8 +12,9 @@ import {
 } from "../../redux/actions/actions.js";
 import { selectAdverts, selectFavorites } from "../../redux/selectors.js";
 
-export const CampersTraks = () => {
+export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
   const dispatch = useDispatch();
+
   const [selectedAdvert, setSelectedAdvert] = useState(null);
   const adverts = useSelector(selectAdverts);
   const favoriteAdverts = useSelector(selectFavorites);
@@ -52,7 +53,7 @@ export const CampersTraks = () => {
   };
   useEffect(() => {
     const favoriteIdsString = localStorage.getItem("favoriteAdverts");
-    if (favoriteIdsString && favoriteIdsString !== "undefined") {
+    if (favoriteIdsString && favoriteIdsString) {
       const favoriteIds = JSON.parse(favoriteIdsString);
       dispatch({ type: "SET_FAVORITES", payload: favoriteIds });
     }
@@ -61,6 +62,27 @@ export const CampersTraks = () => {
   useEffect(() => {
     localStorage.setItem("favoriteAdverts", JSON.stringify(favoriteAdverts));
   }, [favoriteAdverts]);
+
+  useEffect(() => {
+    const filteredAdverts = adverts.filter((advert) => {
+      if (selectedLocation && selectedCategory) {
+        return (
+          advert.location === selectedLocation &&
+          advert.category === selectedCategory
+        );
+      } else if (selectedLocation) {
+        return advert.location === selectedLocation;
+      } else if (selectedCategory) {
+        return advert.category === selectedCategory;
+      } else {
+        return true;
+      }
+    });
+
+    setTotalAdverts(filteredAdverts.length);
+    setVisibleAdverts(filteredAdverts.slice(0, advertsPerPage));
+  }, [adverts, advertsPerPage, selectedLocation, selectedCategory]);
+
   return (
     <div className={css.container}>
       {visibleAdverts.map((advert) => (

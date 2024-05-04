@@ -3,9 +3,8 @@ import { Filters } from "../Filters/Filters";
 import css from "./Searcher.module.css";
 import { Icon } from "../Icon/Icon";
 
-export const Searcher = () => {
+export const Searcher = ({ setSelectedCategory, setSelectedLocation }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -80,7 +79,7 @@ export const Searcher = () => {
           )}
         </div>
       </div>
-      <Filters selectedLocation={selectedLocation} />
+      <Filters setSelectedCategory={setSelectedCategory} />
     </div>
   );
 };
