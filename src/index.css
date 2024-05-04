@@ -19,6 +19,9 @@
     var(--container-width) + var(--container-side-padding) * 2
   );
 }
+textarea {
+  resize: none;
+}
 * {
   box-sizing: border-box;
   margin: 0;

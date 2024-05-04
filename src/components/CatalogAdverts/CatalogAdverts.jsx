@@ -4,9 +4,9 @@ import css from "./CatalogAdverts.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
 import { Features } from "../Features/Features.jsx";
-import Reviews from "../Reviews/Reviews.jsx";
 
 export const CatalogAdverts = ({ selectedAdvert }) => {
+  const [selected, setSelected] = useState("Features");
   const [modalIsOpen, setModalOpen] = useState(false);
 
   const handleShowMore = () => {
@@ -69,13 +69,26 @@ export const CatalogAdverts = ({ selectedAdvert }) => {
               <div className={css.descriptionContainer}>
                 <p>{selectedAdvert.description}</p>
               </div>
-              <div>
-                <span>Features</span>
+              <div className={css.modalBox}>
+                <ul className={css.listModals}>
+                  <li
+                    className={`${css.itemModals} ${
+                      selected === "Features" ? css.selected : ""
+                    }`}
+                    onClick={() => setSelected("Features")}
+                  >
+                    <span className={css.modalFeatures}>Features</span>
+                  </li>
+                  <li
+                    className={`${css.itemModals} ${
+                      selected === "Reviews" ? css.selected : ""
+                    }`}
+                    onClick={() => setSelected("Reviews")}
+                  >
+                    <span className={css.modalReviews}>Reviews</span>
+                  </li>
+                </ul>
                 <Features />
-              </div>
-              <div>
-                <span>Reviews</span>
-                <Reviews />
               </div>
             </div>
           </SimpleModal>
