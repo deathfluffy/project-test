@@ -86,6 +86,7 @@ body {
 body.modal-open {
   overflow: hidden;
 }
+
 /* Tablet */
 @media screen and (min-width: 768px) {
   :root {

@@ -1,0 +1,47 @@
+.boxEqu {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 430px;
+}
+.detailsButton {
+  padding: 12px 18px;
+  background-color: #f2f4f7;
+  color: var(--color-black-main);
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 125%;
+  display: flex;
+  gap: 4px;
+  border-radius: 100px;
+}
+.detailsButtonsContainer {
+  width: 430px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.listDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.itemDetails {
+  display: flex;
+  align-items: center;
+}
+.titleDetails {
+  color: var(--color-black-main);
+  font-size: 20px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  line-height: 120%;
+}
+.key {
+  flex: 1;
+}

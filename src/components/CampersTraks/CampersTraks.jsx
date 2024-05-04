@@ -4,21 +4,18 @@ import css from "./CampersTraks.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
 import CategoryIcon from "../GetCategoryIcon/GetCategoryIcon.jsx";
-import { SimpleModal } from "../Modal/Modal.jsx";
 import { fetchAdverts } from "../../redux/thunkApi/thunkApi.js";
 import {
   addToFavorites,
   removeFromFavorites,
 } from "../../redux/actions/actions.js";
 import { selectAdverts, selectFavorites } from "../../redux/selectors.js";
+import { CatalogAdverts } from "../CatalogAdverts/CatalogAdverts.jsx";
 
 export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
   const dispatch = useDispatch();
-
-  const [selectedAdvert, setSelectedAdvert] = useState(null);
   const adverts = useSelector(selectAdverts);
   const favoriteAdverts = useSelector(selectFavorites);
-  const [modalIsOpen, setModalOpen] = useState(false);
   const [totalAdverts, setTotalAdverts] = useState(0);
   const [advertsPerPage] = useState(4);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
@@ -149,15 +146,7 @@ export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
                 ))}
             </div>
             <div className={css.boxShow}>
-              <button
-                onClick={() => {
-                  setSelectedAdvert(advert);
-                  setModalOpen(true);
-                }}
-                className={css.buttonShow}
-              >
-                Show More
-              </button>
+              <CatalogAdverts selectedAdvert={advert} />
             </div>
           </div>
         </div>
@@ -170,59 +159,6 @@ export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
           </button>
         )}
       </div>
-
-      <SimpleModal isOpen={modalIsOpen} onClose={() => setModalOpen(false)}>
-        {selectedAdvert && (
-          <>
-            <h2 className={css.titleModal}>{selectedAdvert.name}</h2>
-            <div className={css.modalLocal}>
-              <Link className={css.rateBox}>
-                <Icon
-                  width="16"
-                  height="16"
-                  id="icon-star"
-                  className={css.iconReview}
-                ></Icon>
-                {selectedAdvert.rating}(Reviews {selectedAdvert.reviews.length})
-              </Link>
-              <span className={css.locationProduct}>
-                <Icon
-                  width="16"
-                  height="16"
-                  id="icon-map"
-                  className={css.iconLocation}
-                ></Icon>
-                {selectedAdvert.location}
-              </span>
-            </div>
-            <div className={css.modalPrice}>
-              <span className={css.priceProduct}>
-                €{selectedAdvert.price}.00
-              </span>
-            </div>
-            <div className={css.containerLoot}>
-              <img
-                src={selectedAdvert.gallery[0]}
-                alt="campers"
-                className={css.imgContainer}
-              />
-              <img
-                src={selectedAdvert.gallery[1]}
-                alt="campers"
-                className={css.imgContainer}
-              />
-              <img
-                src={selectedAdvert.gallery[2]}
-                alt="campers"
-                className={css.imgContainer}
-              />
-            </div>
-            <div className={css.descriptionContainer}>
-              <p>{selectedAdvert.description}</p>
-            </div>
-          </>
-        )}
-      </SimpleModal>
     </div>
   );
 };

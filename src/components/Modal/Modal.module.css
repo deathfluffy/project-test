@@ -5,8 +5,6 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
-  overflow: hidden;
-  overflow-y: auto;
   transition: opacity 0.3s;
   z-index: 999;
 }
@@ -25,11 +23,10 @@
 .modalContent {
   position: relative;
   width: 100%;
-  max-width: 982px;
+  max-width: 990px;
   border-radius: 20px;
   background-color: #fff;
   padding: 40px;
-  transform: translateY(-50px);
   transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -58,8 +55,8 @@
   opacity: 1;
 }
 
-.modal--entering .modalConten,
-.modal--entered .modalConten {
+.modal--entering .modalContent,
+.modal--entered .modalContent {
   transform: translateY(0);
 }
 
@@ -68,8 +65,8 @@
   opacity: 0;
 }
 
-.modal--exiting .modalConten,
-.modal--exited .modalConten {
+.modal--exiting .modalContent,
+.modal--exited .modalContent {
   transform: translateY(-50px);
 }
 /* width */
