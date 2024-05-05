@@ -6,8 +6,6 @@ Clone the repository
 
 git clone https://github.com/deathfluffy/project-test.git
 
-cd project-test
-
 Install dependencies
 
 npm install
