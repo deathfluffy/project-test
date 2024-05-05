@@ -19,8 +19,10 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+      - name: Clear npm cache and reinstall dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Build project
         run: npm run build
