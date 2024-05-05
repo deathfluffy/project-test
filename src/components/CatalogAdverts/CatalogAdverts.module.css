@@ -122,5 +122,6 @@
   margin-bottom: 24px;
 }
 .itemModals {
+  cursor: pointer;
   margin-right: 40px;
 }

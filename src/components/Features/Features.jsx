@@ -7,9 +7,10 @@ import { useState } from "react";
 export const Features = () => {
   const [formData, setFormData] = useState({
     userName: "",
-    userNumber: "",
     userEmail: "",
+    userDate: "",
     userComment: "",
+    reviewerName: "",
   });
 
   const handleChange = (e) => {
@@ -24,6 +25,19 @@ export const Features = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.userName || !formData.userEmail || !formData.userDate) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    setFormData({
+      userName: "",
+      userEmail: "",
+      userDate: "",
+      userComment: "",
+      reviewerName: "",
+    });
   };
 
   const adverts = useSelector(selectAdverts);
@@ -97,6 +111,7 @@ export const Features = () => {
                   className={css.modalInput}
                   value={formData.userName}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className={css.containerModal}>
@@ -108,6 +123,7 @@ export const Features = () => {
                   className={css.modalInput}
                   value={formData.userEmail}
                   onChange={handleChange}
+                  required
                 />
               </div>
             </div>
@@ -121,6 +137,7 @@ export const Features = () => {
                   className={css.modalInput}
                   value={formData.userDate}
                   onChange={handleChange}
+                  required
                 />
               </div>
             </div>

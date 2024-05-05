@@ -1,8 +1,37 @@
-# React + Vite
+# This is a test task of the company
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Getting Started
 
-Currently, two official plugins are available:
+Clone the repository
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+git clone https://github.com/deathfluffy/project-test.git
+
+cd project-test
+
+Install dependencies
+
+npm install
+
+# Start the app in development mode
+
+npm run dev
+
+This will start the development server at localhost:3000 and automatically open your browser with the app.
+
+# Development
+
+You can start making changes to your app. Files in the src folder correspond to your React code.
+
+# Building for Production
+
+npm run build
+
+This command will build your app for production in the dist folder, ready for deployment.
+
+# Help
+
+If you have any questions or issues using this test task, please open an issue in the repository, and we will try to assist you.
+
+# License
+
+This project is licensed under the MIT License.

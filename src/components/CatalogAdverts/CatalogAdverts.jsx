@@ -4,6 +4,7 @@ import css from "./CatalogAdverts.module.css";
 import { Icon } from "../Icon/Icon.jsx";
 import { Link } from "react-router-dom";
 import { Features } from "../Features/Features.jsx";
+import { Reviews } from "../Reviews/Reviews.jsx";
 
 export const CatalogAdverts = ({ selectedAdvert }) => {
   const [selected, setSelected] = useState("Features");
@@ -88,7 +89,11 @@ export const CatalogAdverts = ({ selectedAdvert }) => {
                     <span className={css.modalReviews}>Reviews</span>
                   </li>
                 </ul>
-                <Features />
+                {selected === "Features" ? (
+                  <Features />
+                ) : (
+                  <Reviews reviews={selectedAdvert.reviews} />
+                )}
               </div>
             </div>
           </SimpleModal>
