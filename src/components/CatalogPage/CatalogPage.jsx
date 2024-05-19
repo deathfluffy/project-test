@@ -8,7 +8,7 @@ export const CatalogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   return (
     <>
-      <div className={css.mainContainer}>
+      <section className={css.mainContainer}>
         <Searcher
           setSelectedLocation={setSelectedLocation}
           setSelectedCategory={setSelectedCategory}
@@ -17,7 +17,7 @@ export const CatalogPage = () => {
           selectedLocation={selectedLocation}
           selectedCategory={selectedCategory}
         />
-      </div>
+      </section>
     </>
   );
 };

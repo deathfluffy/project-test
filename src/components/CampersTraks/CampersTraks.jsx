@@ -81,75 +81,77 @@ export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
   }, [adverts, advertsPerPage, selectedLocation, selectedCategory]);
 
   return (
-    <div className={css.container}>
+    <ul className={css.container}>
       {visibleAdverts.map((advert) => (
-        <div key={advert._id} className={css.boxContainer}>
-          <img src={advert.gallery[0]} alt="campers" className={css.imgBox} />
-          <div className={css.descBox}>
-            <div className={css.boxName}>
-              <span className={css.nameProduct}>{advert.name}</span>
-              <div className={css.iconBox}>
-                <span className={css.priceProduct}>€{advert.price}.00</span>
-                <button
-                  className={css.iconHeart}
-                  onClick={() => toggleFavorite(advert._id)}
-                >
+        <li key={advert._id}>
+          <div className={css.boxContainer}>
+            <img src={advert.gallery[0]} alt="campers" className={css.imgBox} />
+            <div className={css.descBox}>
+              <div className={css.boxName}>
+                <span className={css.nameProduct}>{advert.name}</span>
+                <div className={css.iconBox}>
+                  <span className={css.priceProduct}>€{advert.price}.00</span>
+                  <button
+                    className={css.iconHeart}
+                    onClick={() => toggleFavorite(advert._id)}
+                  >
+                    <Icon
+                      width="24px"
+                      height="24px"
+                      id="icon-heart"
+                      className={
+                        favoriteAdverts && favoriteAdverts.includes(advert._id)
+                          ? css.iconFavorite
+                          : css.icon
+                      }
+                    />
+                  </button>
+                </div>
+              </div>
+              <div className={css.containerLocal}>
+                <Link className={css.rateBox}>
                   <Icon
-                    width="24px"
-                    height="24px"
-                    id="icon-heart"
-                    className={
-                      favoriteAdverts && favoriteAdverts.includes(advert._id)
-                        ? css.iconFavorite
-                        : css.icon
-                    }
-                  />
-                </button>
+                    width="16"
+                    height="16"
+                    id="icon-star"
+                    className={css.iconReview}
+                  ></Icon>
+                  {advert.rating}(Reviews {advert.reviews.length})
+                </Link>
+                <span className={css.locationProduct}>
+                  <Icon
+                    width="16"
+                    height="16"
+                    id="icon-map"
+                    className={css.iconLocation}
+                  ></Icon>
+                  {advert.location}
+                </span>
+              </div>
+              <p className={css.descProduct}>
+                {advert.description.length > 55
+                  ? `${advert.description.slice(0, 55)}...`
+                  : advert.description}
+              </p>
+              <div className={css.detailsButtonsContainer}>
+                {Object.entries(advert.details)
+                  .slice(0, 7)
+                  .map(([category, value]) => (
+                    <button key={category} className={css.detailsButton}>
+                      <CategoryIcon
+                        category={category}
+                        className={css.iconDetail}
+                      />
+                      {value} {category}
+                    </button>
+                  ))}
+              </div>
+              <div className={css.boxShow}>
+                <CatalogAdverts selectedAdvert={advert} />
               </div>
             </div>
-            <div className={css.containerLocal}>
-              <Link className={css.rateBox}>
-                <Icon
-                  width="16"
-                  height="16"
-                  id="icon-star"
-                  className={css.iconReview}
-                ></Icon>
-                {advert.rating}(Reviews {advert.reviews.length})
-              </Link>
-              <span className={css.locationProduct}>
-                <Icon
-                  width="16"
-                  height="16"
-                  id="icon-map"
-                  className={css.iconLocation}
-                ></Icon>
-                {advert.location}
-              </span>
-            </div>
-            <p className={css.descProduct}>
-              {advert.description.length > 55
-                ? `${advert.description.slice(0, 55)}...`
-                : advert.description}
-            </p>
-            <div className={css.detailsButtonsContainer}>
-              {Object.entries(advert.details)
-                .slice(0, 7)
-                .map(([category, value]) => (
-                  <button key={category} className={css.detailsButton}>
-                    <CategoryIcon
-                      category={category}
-                      className={css.iconDetail}
-                    />
-                    {value} {category}
-                  </button>
-                ))}
-            </div>
-            <div className={css.boxShow}>
-              <CatalogAdverts selectedAdvert={advert} />
-            </div>
           </div>
-        </div>
+        </li>
       ))}
 
       <div className={css.buttonBox}>
@@ -159,6 +161,6 @@ export const CampersTraks = ({ selectedLocation, selectedCategory }) => {
           </button>
         )}
       </div>
-    </div>
+    </ul>
   );
 };
