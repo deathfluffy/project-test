@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { NavigationBar } from "./NavigationBar/NavigationBar";
 import { CATALOG_ROUTE, FAVORITE_ROUTE, HOME_ROUTE } from "../routes/routes";
-import { PageLoader } from "./PageLoader/PageLoader";
+import { Loader } from "./Loader/Loader";
 import css from "./App.module.css";
 
 const HomePage = lazy(() => import("../pages/Home"));
@@ -14,7 +14,7 @@ export const App = () => {
     <>
       <NavigationBar />
       <main className={css.containerPage}>
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path={HOME_ROUTE} element={<HomePage />} />
             <Route path={CATALOG_ROUTE} element={<CatalogPage />} />

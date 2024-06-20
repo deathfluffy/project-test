@@ -1,6 +1,6 @@
 import { Hourglass } from "react-loader-spinner";
 
-export const PageLoader = (props) => {
+export const Loader = (props) => {
   return (
     <section>
       <div>
