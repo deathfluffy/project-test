@@ -99,6 +99,43 @@
 .modalLocal {
   margin-bottom: 16px;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.pageLink {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  border-radius: 60px;
+}
+
+.pageLink:hover {
+  background-color: #f0f0f0;
+}
+
+.disabled .pageLink {
+  color: #ccc;
+  cursor: not-allowed;
+}
+.active .pageLink {
+  border: 1px solid var(--color-red-main);
+}
+.break-me {
+  margin: 0 5px;
+  cursor: default;
+}
+.paginationContainer {
+  margin-top: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
 .modalPrice {
   margin-bottom: 24px;
 }

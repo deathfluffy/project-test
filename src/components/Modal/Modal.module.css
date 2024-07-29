@@ -23,7 +23,7 @@
 .modalContent {
   position: relative;
   width: 100%;
-  max-width: 992px;
+  width: 992px;
   border-radius: 20px;
   background-color: #fff;
   padding: 40px;
@@ -68,24 +68,4 @@
 .modal--exiting .modalContent,
 .modal--exited .modalContent {
   transform: translateY(-50px);
-}
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 7px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #d9d9d9;
-  border-radius: 7px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #d9d9d9;
 }

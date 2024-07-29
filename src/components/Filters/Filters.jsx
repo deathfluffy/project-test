@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Icon } from "../Icon/Icon";
 import css from "./Filters.module.css";
+
 export const Filters = ({ setSelectedCategory }) => {
   const [filterParams, setFilterParams] = useState({
     AC: false,
@@ -14,30 +15,31 @@ export const Filters = ({ setSelectedCategory }) => {
   });
 
   const handleFilterChange = (param) => {
-    setFilterParams((prevParams) => ({
-      ...prevParams,
-      [param]: !prevParams[param],
-    }));
+    setFilterParams((prevParams) => {
+      const newParams = { ...prevParams, [param]: !prevParams[param] };
+      setSelectedCategory(newParams);
+      return newParams;
+    });
   };
 
   const handleSearchClick = () => {
     setSelectedCategory(filterParams);
   };
 
+
   return (
     <div className={css.container}>
       <div className={css.boxContainer}>
         <span className={css.filterTitle}>Filters</span>
         <h2 className={css.titleVehicle}>Vehicle equipment</h2>
-        <hr></hr>
-        <div>
+        <hr />
+        <div className={css.containerFilter}>
           <ul className={css.boxEqu}>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.AC && css.active}`}
+                className={`${css.buttonItem} ${filterParams.AC ? css.active : ''}`}
                 onClick={() => handleFilterChange("AC")}
               >
-                AC
                 <Icon
                   className={css.itemIcon}
                   style={{ fill: "black" }}
@@ -45,14 +47,14 @@ export const Filters = ({ setSelectedCategory }) => {
                   height="32"
                   id="icon-AC"
                 />
+                <span className={css.filterItems}>AC</span>
               </button>
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.AC && css.active}`}
-                onClick={() => handleFilterChange("AC")}
+                className={`${css.buttonItem} ${filterParams.automatic ? css.active : ''}`}
+                onClick={() => handleFilterChange("automatic")}
               >
-                Automatic
                 <Icon
                   style={{ fill: "transparent", stroke: "black" }}
                   className={css.itemIcon}
@@ -60,27 +62,29 @@ export const Filters = ({ setSelectedCategory }) => {
                   height="32"
                   id="icon-automatic"
                 />
+                <span className={css.filterItems}>Automatic</span>
               </button>
             </li>
-            <button
-              className={`${css.buttonItem} ${filterParams.AC && css.active}`}
-              onClick={() => handleFilterChange("AC")}
-            >
-              Kitchen
-              <Icon
-                style={{ fill: "transparent", stroke: "black" }}
-                className={css.itemIcon}
-                width="32"
-                height="32"
-                id="icon-kitchen"
-              />
-            </button>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.AC && css.active}`}
-                onClick={() => handleFilterChange("AC")}
+                className={`${css.buttonItem} ${filterParams.kitchen ? css.active : ''}`}
+                onClick={() => handleFilterChange("kitchen")}
               >
-                TV
+                <Icon
+                  style={{ fill: "transparent", stroke: "black" }}
+                  className={css.itemIcon}
+                  width="32"
+                  height="32"
+                  id="icon-kitchen"
+                />
+                <span className={css.filterItems}>Kitchen</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className={`${css.buttonItem} ${filterParams.TV ? css.active : ''}`}
+                onClick={() => handleFilterChange("TV")}
+              >
                 <Icon
                   style={{ fill: "transparent", stroke: "black" }}
                   className={css.itemIcon}
@@ -88,14 +92,14 @@ export const Filters = ({ setSelectedCategory }) => {
                   height="32"
                   id="icon-TV"
                 />
+                <span className={css.filterItems}>TV</span>
               </button>
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.AC && css.active}`}
-                onClick={() => handleFilterChange("AC")}
+                className={`${css.buttonItem} ${filterParams.bathroom ? css.active : ''}`}
+                onClick={() => handleFilterChange("bathroom")}
               >
-                Shower/WC
                 <Icon
                   style={{ fill: "transparent", stroke: "black" }}
                   className={css.itemIcon}
@@ -103,20 +107,24 @@ export const Filters = ({ setSelectedCategory }) => {
                   height="32"
                   id="icon-showerWC"
                 />
+                <span className={css.filterItems}>Shower/WC</span>
               </button>
             </li>
           </ul>
         </div>
       </div>
       <h2 className={css.titleVehicle}>Vehicle type</h2>
-      <hr></hr>
-      <div>
+      <hr />
+      <div className={css.containerFilter}>
         <ul className={css.boxEqu}>
           <li className={css.liItem}>
-            <button className={css.buttonItem}>
-              Van
+            <button
+              className={`${css.buttonItem} ${filterParams.van ? css.active : ''}`}
+              onClick={() => handleFilterChange("van")}
+            >
+              <span>Van</span>
               <Icon
-                className={css.itemIcon}
+                className={css.iconTrack}
                 width="40"
                 height="28"
                 id="icon-van"
@@ -124,8 +132,11 @@ export const Filters = ({ setSelectedCategory }) => {
             </button>
           </li>
           <li className={css.liItem}>
-            <button className={css.buttonItem}>
-              Fully Integrated
+            <button
+              className={`${css.buttonItem} ${filterParams.fullyIntegrated ? css.active : ''}`}
+              onClick={() => handleFilterChange("fullyIntegrated")}
+            >
+              <span className={css.inButton}>Fully Integrated</span>
               <Icon
                 className={css.iconTrack}
                 width="40"
@@ -135,8 +146,11 @@ export const Filters = ({ setSelectedCategory }) => {
             </button>
           </li>
           <li className={css.liItem}>
-            <button className={css.buttonItem}>
-              Alcove
+            <button
+              className={`${css.buttonItem} ${filterParams.alcove ? css.active : ''}`}
+              onClick={() => handleFilterChange("alcove")}
+            >
+              <span>Alcove</span>
               <Icon
                 className={css.iconTrack}
                 width="40"
@@ -147,7 +161,7 @@ export const Filters = ({ setSelectedCategory }) => {
           </li>
         </ul>
       </div>
-      <div className={css.boxSeacrh} onClick={handleSearchClick}>
+      <div className={css.boxSearch} onClick={handleSearchClick}>
         <button className={css.buttonSearch}>Search</button>
       </div>
     </div>

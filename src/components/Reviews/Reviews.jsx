@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import css from "./Reviews.module.css";
 import { Icon } from "../Icon/Icon";
+import { DayPicker } from "react-day-picker";
+import { format } from "date-fns";
 
 export const Reviews = ({ reviews }) => {
+  const inputId = useId();
+  const dayPickerRef = useRef(null);
   const [formData, setFormData] = useState({
     userName: "",
     userEmail: "",
@@ -10,6 +14,45 @@ export const Reviews = ({ reviews }) => {
     userComment: "",
     reviewerName: "",
   });
+  const [month, setMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(undefined);
+  const [showDayPicker, setShowDayPicker] = useState(false);
+
+  const handleInputClick = () => {
+    setShowDayPicker(true);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (dayPickerRef.current && !dayPickerRef.current.contains(event.target)) {
+      setShowDayPicker(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  const handleDayPickerSelect = (date) => {
+    if (!date) {
+      setFormData((prevData) => ({
+        ...prevData,
+        userDate: "",
+      }));
+      setSelectedDate(undefined);
+    } else {
+      const formattedDate = format(date, "MM/dd/yyyy");
+      setFormData((prevData) => ({
+        ...prevData,
+        userDate: formattedDate,
+      }));
+      setSelectedDate(date);
+      setMonth(date);
+    }
+    setShowDayPicker(false);
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -126,19 +169,37 @@ export const Reviews = ({ reviews }) => {
               />
             </div>
           </div>
-          <div className={css.dataFormContainer}>
-            <div className={css.containerModal}>
-              <input
-                placeholder="Booking Date"
-                id="user-date"
-                name="userDate"
-                type="date"
-                className={css.modalInput}
-                value={formData.userDate}
-                onChange={handleChange}
-                required
+          <div className={css.datePickerContainer} ref={dayPickerRef}>
+            <input
+              id={inputId}
+              type="text"
+              name="userDate"
+              className={css.modalInput}
+              value={formData.userDate}
+              placeholder="Booking Date"
+              onClick={handleInputClick}
+              readOnly
+            />
+            {showDayPicker && (
+              <DayPicker
+                classNames={{
+                  table: css.dayPickerTable,
+                  caption: css.dayPickerHeader,
+                  root: css.dayPicker,
+                  nav: css.dayPickerNav,
+                  month: css.dayPickerMonth,
+                  week: css.dayPickerWeek,
+                  day: css.dayPickerDay,
+                  selected: css.dayPickerDaySelected,
+                  today: css.dayPickerDayToday,
+                }}
+                month={month}
+                onMonthChange={setMonth}
+                mode="single"
+                selected={selectedDate}
+                onSelect={handleDayPickerSelect}
               />
-            </div>
+            )}
           </div>
           <div className={css.dataFormTextarea}>
             <textarea

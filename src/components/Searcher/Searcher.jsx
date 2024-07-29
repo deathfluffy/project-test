@@ -3,12 +3,16 @@ import { Filters } from "../Filters/Filters";
 import css from "./Searcher.module.css";
 import { Icon } from "../Icon/Icon";
 
-export const Searcher = ({ setSelectedCategory, setSelectedLocation }) => {
+export const Searcher = ({
+  selectedLocation,
+  setSelectedLocation,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const [searchInput, setSearchInput] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState([]);
-
   const options = [
     "Ukraine, Kyiv",
     "Ukraine, Poltava",
@@ -79,7 +83,11 @@ export const Searcher = ({ setSelectedCategory, setSelectedLocation }) => {
           )}
         </div>
       </div>
-      <Filters setSelectedCategory={setSelectedCategory} />
+      <Filters
+        selectedLocation={selectedLocation}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </div>
   );
 };

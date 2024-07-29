@@ -1,4 +1,7 @@
+@import "../node_modules/react-datepicker/dist/react-datepicker.css";
 @import "../node_modules/modern-normalize/modern-normalize.css";
+
+
 :root {
   --font-main: "Inter", sans-serif;
   --color-black-main: #101828;
@@ -19,6 +22,27 @@
     var(--container-width) + var(--container-side-padding) * 2
   );
 }
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d9d9d9;
+}
+
 textarea {
   resize: none;
 }

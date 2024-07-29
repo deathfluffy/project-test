@@ -29,9 +29,9 @@ export const catalogSlice = createSlice({
       })
       .addCase(removeFromFavorites, (state, action) => {
         state.favorites = state.favorites.filter(
-          (advertId) => advertId !== action.payload
+          (advert) => advert._id !== action.payload
         );
-      });
+      });    
   },
 });
 

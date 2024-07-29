@@ -9,11 +9,6 @@ hr {
   height: 95px;
   padding: 17px 40px;
   border-radius: 10px;
-  color: var(--color-main-black);
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,8 +21,13 @@ hr {
     border: 1px solid #e44848;
   }
 }
+
+.inButton{
+  margin-top: 8px;
+}
 .titleVehicle {
   margin-top: 14px;
+  margin-bottom: 24px;
   color: var(--color-main-black);
   font-size: 20px;
   font-weight: 600;
@@ -48,6 +48,10 @@ hr {
   left: 50%;
   margin-bottom: 4px;
   transform: translateX(-50%);
+}
+.containerFilter{
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 .boxEqu {
   display: flex;
@@ -71,4 +75,11 @@ hr {
   &:hover {
     background-color: #d84343;
   }
+}
+.filterItems {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-main-black);
+  margin-top: 8px;
 }
