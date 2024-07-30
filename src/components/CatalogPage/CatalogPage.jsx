@@ -5,7 +5,7 @@ import css from "./CatalogPage.module.css";
 
 export const CatalogPage = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState({});
 
   return (
     <section className={css.mainContainer}>
