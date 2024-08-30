@@ -20,19 +20,19 @@ const CategoryIcon = ({ category }) => {
       return <Icon width="20" height="20" id="icon-automatic" />;
     case "AC":
       return <Icon width="20" height="20" id="icon-AC" />;
-    case "Shower":
+    case "bathroom":
       return <Icon width="20" height="20" id="icon-showerWC" />;
-    case "Freezer":
+    case "freezer":
       return <Icon width="20" height="20" id="icon-freezer" />;
     case "CD":
       return <Icon width="20" height="20" id="icon-cd" />;
     case "water":
       return <Icon width="20" height="20" id="icon-water" />;
-    case "Radio":
+    case "radio":
       return <Icon width="20" height="20" id="icon-radio" />;
     case "microwave":
       return <Icon width="20" height="20" id="icon-microwave" />;
-    case "Toilet":
+    case "toilet":
       return <Icon width="20" height="20" id="icon-toilet-papers" />;
     case "TV":
       return <Icon width="20" height="20" id="icon-TV" />;

@@ -1,32 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "../Icon/Icon";
 import css from "./Filters.module.css";
 
 export const Filters = ({ setSelectedCategory }) => {
-  const [filterParams, setFilterParams] = useState({
-    AC: false,
-    automatic: false,
-    kitchen: false,
-    TV: false,
-    bathroom: false,
-    van: false,
-    fullyIntegrated: false,
-    alcove: false,
-  });
+  const [filterParams, setFilterParams] = useState({});
+
+  useEffect(() => {
+    setSelectedCategory(filterParams);
+  }, [filterParams, setSelectedCategory]);
 
   const handleFilterChange = (param) => {
-    setFilterParams((prevParams) => {
-      const newParams = { ...prevParams, [param]: !prevParams[param] };
-      setSelectedCategory(newParams);
-      return newParams;
-    });
+    setFilterParams((prevParams) => ({
+      ...prevParams,
+      [param]: !prevParams[param],
+    }));
   };
 
   const handleSearchClick = () => {
     setSelectedCategory(filterParams);
   };
-
-
   return (
     <div className={css.container}>
       <div className={css.boxContainer}>

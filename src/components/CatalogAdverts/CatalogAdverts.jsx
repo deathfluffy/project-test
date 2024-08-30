@@ -53,7 +53,7 @@ export const CatalogAdverts = ({ selectedAdvert }) => {
 
               <div className={css.modalPrice}>
                 <span className={css.priceProduct}>
-                  €{selectedAdvert.price}.00
+                  €{selectedAdvert.price}
                 </span>
               </div>
 

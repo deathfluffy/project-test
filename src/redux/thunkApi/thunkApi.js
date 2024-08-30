@@ -28,3 +28,26 @@ export const fetchDetailsFromServer = createAsyncThunk(
     }
   }
 );
+export const fetchFilteredAdverts = createAsyncThunk(
+  "catalog/fetchFilteredAdverts",
+  async (filterParams) => {
+    try {
+      const response = await axios.get(apiUrl);
+      const adverts = response.data;
+
+      const filteredAdverts = adverts.filter((advert) => {
+        return Object.keys(filterParams).every((key) => {
+          return (
+            advert.details[key] !== undefined &&
+            advert.details[key] === filterParams[key]
+          );
+        });
+      });
+
+      return filteredAdverts;
+    } catch (error) {
+      console.error("Error fetching filtered adverts:", error);
+      throw error;
+    }
+  }
+);

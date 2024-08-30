@@ -14,7 +14,11 @@ import { CatalogAdverts } from "../CatalogAdverts/CatalogAdverts.jsx";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 
-export const CampersTraks = ({ selectedCategory, selectedLocation }) => {
+export const CampersTraks = ({
+  selectedCategory,
+  selectedLocation,
+  setSelectedCategory,
+}) => {
   const dispatch = useDispatch();
   const adverts = useSelector(selectAdverts);
   const favoriteAdverts = useSelector(selectFavorites);
@@ -29,26 +33,64 @@ export const CampersTraks = ({ selectedCategory, selectedLocation }) => {
   }, [dispatch]);
 
   useEffect(() => {
+    const selectedCategoryKeys = Object.keys(selectedCategory).filter(
+      (key) => selectedCategory[key]
+    );
+
     const filteredAdverts = adverts.filter((advert) => {
-      if (selectedLocation && selectedCategory) {
-        return advert.location === selectedLocation && advert.category === selectedCategory;
-      } else if (selectedLocation) {
-        return advert.location === selectedLocation;
-      } else if (selectedCategory) {
-        return advert.category === selectedCategory;
-      } else {
-        return true;
-      }
+      const locationMatch = selectedLocation
+        ? advert.location === selectedLocation
+        : true;
+
+      const categoryMatch = selectedCategoryKeys.every((key) => {
+        if (key === "automatic") {
+          return advert.transmission === "automatic";
+        } else if (key === "alcove") {
+          return advert.form === "alcove";
+        } else if (key === "fullyIntegrated") {
+          return advert.form === "fullyIntegrated";
+        } else if (key === "AC") {
+          return advert.details["Air conditioner"] > 0;
+        } else {
+          return advert.details[key] > 0;
+        }
+      });
+
+      return locationMatch && categoryMatch;
     });
+
+    if (selectedCategoryKeys.length > 0 && filteredAdverts.length === 0) {
+      toast.error(
+        "No campers match your selected criteria. Resetting all categories."
+      );
+      setSelectedCategory({
+        AC: false,
+        automatic: false,
+        kitchen: false,
+        TV: false,
+        bathroom: false,
+        van: false,
+        fullyIntegrated: false,
+        alcove: false,
+      });
+    }
 
     setTotalAdverts(filteredAdverts.length);
     setVisibleAdverts(filteredAdverts.slice(0, advertsPerPage));
     setShowLoadMoreButton(filteredAdverts.length > advertsPerPage);
-  }, [adverts, selectedLocation, selectedCategory, advertsPerPage]);
+  }, [
+    adverts,
+    selectedLocation,
+    selectedCategory,
+    advertsPerPage,
+    setSelectedCategory,
+  ]);
 
   const addFavoriteAdvert = (advert) => {
     const favoriteAdvertsString = localStorage.getItem("favoriteAdverts");
-    let favoriteAdverts = favoriteAdvertsString ? JSON.parse(favoriteAdvertsString) : [];
+    let favoriteAdverts = favoriteAdvertsString
+      ? JSON.parse(favoriteAdvertsString)
+      : [];
     favoriteAdverts.push(advert);
     localStorage.setItem("favoriteAdverts", JSON.stringify(favoriteAdverts));
     dispatch(addToFavorites(advert));
@@ -58,7 +100,9 @@ export const CampersTraks = ({ selectedCategory, selectedLocation }) => {
     const favoriteAdvertsString = localStorage.getItem("favoriteAdverts");
     if (favoriteAdvertsString) {
       let favoriteAdverts = JSON.parse(favoriteAdvertsString);
-      favoriteAdverts = favoriteAdverts.filter((advert) => advert._id !== advertId);
+      favoriteAdverts = favoriteAdverts.filter(
+        (advert) => advert._id !== advertId
+      );
       localStorage.setItem("favoriteAdverts", JSON.stringify(favoriteAdverts));
       dispatch(removeFromFavorites(advertId));
     }
@@ -155,7 +199,7 @@ export const CampersTraks = ({ selectedCategory, selectedLocation }) => {
                 </p>
                 <div className={css.detailsButtonsContainer}>
                   {Object.entries(advert.details)
-                    .slice(0, 7)         
+                    .slice(0, 7)
                     .map(([category, value]) => (
                       <button key={category} className={css.detailsButton}>
                         <CategoryIcon
