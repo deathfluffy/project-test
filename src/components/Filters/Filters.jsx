@@ -1,24 +1,47 @@
 import { useEffect, useState } from "react";
 import { Icon } from "../Icon/Icon";
 import css from "./Filters.module.css";
+import { toast } from "react-toastify";
 
 export const Filters = ({ setSelectedCategory }) => {
-  const [filterParams, setFilterParams] = useState({});
+  const [filterParams, setFilterParams] = useState({
+    AC: false,
+    automatic: false,
+    kitchen: false,
+    TV: false,
+    bathroom: false,
+    van: false,
+    fullyIntegrated: false,
+    alcove: false,
+  });
 
   useEffect(() => {
     setSelectedCategory(filterParams);
   }, [filterParams, setSelectedCategory]);
 
   const handleFilterChange = (param) => {
-    setFilterParams((prevParams) => ({
-      ...prevParams,
-      [param]: !prevParams[param],
-    }));
+    setFilterParams((prevParams) => {
+      const updatedParams = {
+        ...prevParams,
+        [param]: !prevParams[param],
+      };
+
+      const anyCategorySelected = Object.values(updatedParams).some(
+        (value) => value === true
+      );
+
+      if (anyCategorySelected) {
+        toast.success("Category selected successfully");
+      } else if (!anyCategorySelected) {
+        toast.info("Category cleared");
+      } else {
+        toast.info("All categories cleared");
+      }
+
+      return updatedParams;
+    });
   };
 
-  const handleSearchClick = () => {
-    setSelectedCategory(filterParams);
-  };
   return (
     <div className={css.container}>
       <div className={css.boxContainer}>
@@ -29,7 +52,9 @@ export const Filters = ({ setSelectedCategory }) => {
           <ul className={css.boxEqu}>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.AC ? css.active : ''}`}
+                className={`${css.buttonItem} ${
+                  filterParams.AC ? css.active : ""
+                }`}
                 onClick={() => handleFilterChange("AC")}
               >
                 <Icon
@@ -44,7 +69,9 @@ export const Filters = ({ setSelectedCategory }) => {
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.automatic ? css.active : ''}`}
+                className={`${css.buttonItem} ${
+                  filterParams.automatic ? css.active : ""
+                }`}
                 onClick={() => handleFilterChange("automatic")}
               >
                 <Icon
@@ -59,7 +86,9 @@ export const Filters = ({ setSelectedCategory }) => {
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.kitchen ? css.active : ''}`}
+                className={`${css.buttonItem} ${
+                  filterParams.kitchen ? css.active : ""
+                }`}
                 onClick={() => handleFilterChange("kitchen")}
               >
                 <Icon
@@ -74,7 +103,9 @@ export const Filters = ({ setSelectedCategory }) => {
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.TV ? css.active : ''}`}
+                className={`${css.buttonItem} ${
+                  filterParams.TV ? css.active : ""
+                }`}
                 onClick={() => handleFilterChange("TV")}
               >
                 <Icon
@@ -89,7 +120,9 @@ export const Filters = ({ setSelectedCategory }) => {
             </li>
             <li>
               <button
-                className={`${css.buttonItem} ${filterParams.bathroom ? css.active : ''}`}
+                className={`${css.buttonItem} ${
+                  filterParams.bathroom ? css.active : ""
+                }`}
                 onClick={() => handleFilterChange("bathroom")}
               >
                 <Icon
@@ -111,7 +144,9 @@ export const Filters = ({ setSelectedCategory }) => {
         <ul className={css.boxEqu}>
           <li className={css.liItem}>
             <button
-              className={`${css.buttonItem} ${filterParams.van ? css.active : ''}`}
+              className={`${css.buttonItem} ${
+                filterParams.van ? css.active : ""
+              }`}
               onClick={() => handleFilterChange("van")}
             >
               <span>Van</span>
@@ -125,7 +160,9 @@ export const Filters = ({ setSelectedCategory }) => {
           </li>
           <li className={css.liItem}>
             <button
-              className={`${css.buttonItem} ${filterParams.fullyIntegrated ? css.active : ''}`}
+              className={`${css.buttonItem} ${
+                filterParams.fullyIntegrated ? css.active : ""
+              }`}
               onClick={() => handleFilterChange("fullyIntegrated")}
             >
               <span className={css.inButton}>Fully Integrated</span>
@@ -139,7 +176,9 @@ export const Filters = ({ setSelectedCategory }) => {
           </li>
           <li className={css.liItem}>
             <button
-              className={`${css.buttonItem} ${filterParams.alcove ? css.active : ''}`}
+              className={`${css.buttonItem} ${
+                filterParams.alcove ? css.active : ""
+              }`}
               onClick={() => handleFilterChange("alcove")}
             >
               <span>Alcove</span>
@@ -152,9 +191,6 @@ export const Filters = ({ setSelectedCategory }) => {
             </button>
           </li>
         </ul>
-      </div>
-      <div className={css.boxSearch} onClick={handleSearchClick}>
-        <button className={css.buttonSearch}>Search</button>
       </div>
     </div>
   );

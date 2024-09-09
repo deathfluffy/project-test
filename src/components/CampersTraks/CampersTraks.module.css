@@ -89,6 +89,7 @@
 .icon {
   fill: transparent;
   stroke: var(--color-black-main);
+  
 }
 .priceProduct {
   margin-right: 10px;
@@ -116,7 +117,9 @@
 .pageLink:hover {
   background-color: #f0f0f0;
 }
-
+.pageItem{
+  cursor: pointer;
+}
 .disabled .pageLink {
   color: #ccc;
   cursor: not-allowed;

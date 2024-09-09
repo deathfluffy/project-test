@@ -21,7 +21,9 @@ hr {
     border: 1px solid #e44848;
   }
 }
-
+.active {
+  border: 1px solid #e44848;
+}
 .inButton{
   margin-top: 8px;
 }
@@ -52,6 +54,12 @@ hr {
 .containerFilter{
   margin-top: 24px;
   margin-bottom: 24px;
+}
+.box{
+  display: block;
+}
+.display{
+  display: none;
 }
 .boxEqu {
   display: flex;

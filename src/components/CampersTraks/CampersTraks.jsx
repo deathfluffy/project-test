@@ -63,16 +63,7 @@ export const CampersTraks = ({
       toast.error(
         "No campers match your selected criteria. Resetting all categories."
       );
-      setSelectedCategory({
-        AC: false,
-        automatic: false,
-        kitchen: false,
-        TV: false,
-        bathroom: false,
-        van: false,
-        fullyIntegrated: false,
-        alcove: false,
-      });
+      setSelectedCategory({});
     }
 
     setTotalAdverts(filteredAdverts.length);
