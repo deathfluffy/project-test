@@ -17,7 +17,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store} loading={<Loader />}>
     <PersistGate loading={<Loader />} persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename="/project-test">
         <App />
         <ToastContainer
           position="top-right"
