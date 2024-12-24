@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import css from "./HomePage.module.css";
 import { CATALOG_ROUTE } from "../../routes/routes";
 export const HomePage = () => {
+  const navigate = useNavigate()
   return (
     <section className={css.sectionHome}>
       <div className={css.container}>
@@ -13,9 +14,9 @@ export const HomePage = () => {
           most beautiful corners of nature, enjoy the diversity of cultural
           experiences and take a break from the city bustle.
         </p>
-        <Link to={CATALOG_ROUTE} className={css.buttonHome}>
-          Go to Catalog
-        </Link>
+          <button onClick={() => navigate(CATALOG_ROUTE)} className={css.buttonHome}>
+            Go to Catalog
+          </button>
       </div>
     </section>
   );
