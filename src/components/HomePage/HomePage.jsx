@@ -13,9 +13,9 @@ export const HomePage = () => {
           most beautiful corners of nature, enjoy the diversity of cultural
           experiences and take a break from the city bustle.
         </p>
-        <button className={css.buttonHome}>
-          <Link to={CATALOG_ROUTE}>Go to Catalog</Link>
-        </button>
+        <Link to={CATALOG_ROUTE} className={css.buttonHome}>
+          Go to Catalog
+        </Link>
       </div>
     </section>
   );
