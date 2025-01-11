@@ -38,22 +38,18 @@ export const CampersTraks = ({
     );
 
     const filteredAdverts = adverts.filter((advert) => {
-      const locationMatch = selectedLocation
-        ? advert.location === selectedLocation
-        : true;
-
+      const locationMatch = !selectedLocation || advert.location === selectedLocation;
+    
+      const categoryCheckMap = {
+        automatic: () => advert.transmission === "automatic",
+        alcove: () => advert.form === "alcove",
+        fullyIntegrated: () => advert.form === "fullyIntegrated",
+        AC: () => advert.details["Air conditioner"] > 0,
+      };
+    
       const categoryMatch = selectedCategoryKeys.every((key) => {
-        if (key === "automatic") {
-          return advert.transmission === "automatic";
-        } else if (key === "alcove") {
-          return advert.form === "alcove";
-        } else if (key === "fullyIntegrated") {
-          return advert.form === "fullyIntegrated";
-        } else if (key === "AC") {
-          return advert.details["Air conditioner"] > 0;
-        } else {
-          return advert.details[key] > 0;
-        }
+        const check = categoryCheckMap[key] || (() => advert.details[key] > 0);
+        return check();
       });
 
       return locationMatch && categoryMatch;
