@@ -26,7 +26,7 @@ export const FavoriteAdverts = () => {
     }
   };
 
-  const toggleFavorite = (advert) => {
+  const toggleRemoveFavorite = (advert) => {
     if (favoriteAdverts.find((fav) => fav._id === advert._id)) {
 
       toast.success("Track was successfully deleted")
@@ -71,7 +71,7 @@ export const FavoriteAdverts = () => {
                   <span className={css.nameProduct}>{advert.name}</span>
                   <div className={css.iconBox}>
                     <span className={css.priceProduct}>€{advert.price}</span>
-                    <button className={css.iconHeart} onClick={() => toggleFavorite(advert)}>
+                    <button className={css.iconHeart} onClick={() => toggleRemoveFavorite(advert)}>
                       <Icon
                         width="24px"
                         height="24px"
